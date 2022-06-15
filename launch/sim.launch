@@ -1,0 +1,23 @@
+<launch>
+
+    <arg name="gui" default="true" />
+    <arg name="load_gripper" default="true" />
+    <arg name="robot_description" default="robot_description" />
+    <arg name="rvizconfig" default="$(find panda_human_sim_2206)/rviz/demo.rviz" />
+
+    <param name="$(arg robot_description)" command="$(find xacro)/xacro $(find franka_description)/robots/panda_arm.urdf.xacro hand:=$(arg load_gripper)" />
+    
+    <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
+        <rosparam param="/source_list">[cmd/joint_position]</rosparam>
+    </node>
+    <node unless="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="/source_list">[cmd/joint_position]</rosparam>
+    </node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+
+    <!-- EXTRA NODES -->
+    <node name="human_tf_broadcaster" pkg="panda_human_sim_2206" type="human_tf_broadcaster" required="true" output="screen" />
+
+</launch>
