@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     transformStamped.child_frame_id = "human";
 
     transformStamped.transform.translation.x =
-        1.0 + 0.3 * sin(2.0 * M_PI * 0.1 * t.toSec());
+        1.0 + 0.3 * sin(2.0 * M_PI * 0.05 * t.toSec());
     transformStamped.transform.translation.y = 0.0;
     transformStamped.transform.translation.z = 0.5;
 
