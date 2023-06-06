@@ -4,8 +4,11 @@
     <arg name="load_gripper" default="true" />
     <arg name="robot_description" default="robot_description" />
     <arg name="rvizconfig" default="$(find panda_human_sim_2206)/rviz/demo.rviz" />
+    <arg name="arm_id" default="panda" />
+    <arg name="robot_description" default="robot_description"/>
 
-    <param name="$(arg robot_description)" command="$(find xacro)/xacro $(find franka_description)/robots/panda_arm.urdf.xacro hand:=$(arg load_gripper)" />
+    <!-- Load universal robot description format (URDF) -->
+    <param name="$(arg robot_description)" command="xacro '$(find franka_description)/robots/panda/panda.urdf.xacro' hand:=$(arg load_gripper) arm_id:=$(arg arm_id)"  />
     
     <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
         <rosparam param="/source_list">[cmd/joint_position]</rosparam>
