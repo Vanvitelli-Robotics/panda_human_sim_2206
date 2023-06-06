@@ -5,7 +5,6 @@
     <arg name="robot_description" default="robot_description" />
     <arg name="rvizconfig" default="$(find panda_human_sim_2206)/rviz/demo.rviz" />
     <arg name="arm_id" default="panda" />
-    <arg name="robot_description" default="robot_description"/>
 
     <!-- Load universal robot description format (URDF) -->
     <param name="$(arg robot_description)" command="xacro '$(find franka_description)/robots/panda/panda.urdf.xacro' hand:=$(arg load_gripper) arm_id:=$(arg arm_id)"  />
